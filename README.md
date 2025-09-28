@@ -4,7 +4,7 @@
 - Studentennummer: 123456789
 - Academiejaar: 25-26
 - Klasgroep: ISB204A
-- Onderwerp: Animal _ - _ Farm 1 - \* Harvest
+- Onderwerp: Animal \* - \* Farm 1 - \* Harvest
 
 ## Sprint 1
 
