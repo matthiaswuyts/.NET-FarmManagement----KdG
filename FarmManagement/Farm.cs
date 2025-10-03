@@ -25,7 +25,7 @@ public class Farm
 
     public override string ToString()
     {
-        return $"Farm: {Name} (ID: {Id}) located at {Location} with {(SizeInHectares.HasValue ? $"{SizeInHectares} hectares" : "unknown size of hectares")}. Founded in {EstablisedYear} with {Harvests.Count} harvests and {Animals.Count} animals.";
+        return $"Farm: {Name} (ID: {Id}) located in {Location} with {(SizeInHectares.HasValue ? $"{SizeInHectares} hectares" : "unknown size of hectares")}. Founded in {EstablisedYear} with {Harvests.Count} harvests and {Animals.Count} animals.";
     }
 
 }

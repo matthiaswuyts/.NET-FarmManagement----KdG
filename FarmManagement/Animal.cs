@@ -3,18 +3,18 @@
 public class Animal
 {
     
-    public DateOnly BirthDate { get; set; }
-    public string Name { get; set; }
-    public double Weight { get; set; }
-    
+    public double AverageWeight { get; set; }
     public AnimalType Type { get; set; }
+    public int Lifespan { get; set; }
+    
+    public string Species { get; set; }
     public ICollection<Farm> Farms { get; set; }
 
-    public Animal( DateOnly birthDate, string name, double weight, AnimalType type)
+    public Animal(string species, int lifespan, double averageWeight, AnimalType type)
     {
-        BirthDate = birthDate;
-        Name = name;
-        Weight = weight;
+        Species = species;
+        Lifespan = lifespan;
+        AverageWeight = averageWeight;
         Type = type;
         Farms = new List<Farm>();
     }
@@ -22,8 +22,9 @@ public class Animal
 
     public override string ToString()
     {
-        return $"Name: {Name} ({Type}), Born on {BirthDate.ToShortDateString()} (Weight {Weight} kg)";
+        return $"{Type} (Species: {Species}), Lifespan: {Lifespan} yrs, Avg. weight: {AverageWeight} kg";
     }
+
     
     
     public void AddFarm(Farm farm)

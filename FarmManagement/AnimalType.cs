@@ -6,5 +6,6 @@ public enum AnimalType
     Pig,
     Chicken,
     Sheep,
-    Goat
+    Goat,
+    Horse
 }
