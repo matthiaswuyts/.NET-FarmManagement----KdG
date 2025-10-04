@@ -1,5 +1,4 @@
-﻿namespace FarmManagement;
-
+﻿namespace FarmManagement.BL.Domain;
 public class Farm
 {
     private static int _nextId = 1;

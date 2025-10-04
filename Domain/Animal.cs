@@ -1,7 +1,10 @@
-﻿namespace FarmManagement;
+﻿namespace FarmManagement.BL.Domain;
 
 public class Animal
 {
+    private static int _nextId = 1;
+
+    public int Id { get; private set; }
     
     public double AverageWeight { get; set; }
     public AnimalType Type { get; set; }
@@ -12,6 +15,7 @@ public class Animal
 
     public Animal(string species, int lifespan, double averageWeight, AnimalType type)
     {
+        Id = _nextId++;
         Species = species;
         Lifespan = lifespan;
         AverageWeight = averageWeight;

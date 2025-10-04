@@ -1,5 +1,4 @@
-﻿namespace FarmManagement;
-
+﻿namespace FarmManagement.BL.Domain;
 public enum AnimalType
 {
     Cow = 1,

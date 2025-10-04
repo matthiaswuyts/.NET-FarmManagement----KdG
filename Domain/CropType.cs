@@ -1,4 +1,4 @@
-﻿namespace FarmManagement;
+﻿namespace FarmManagement.BL.Domain;
 
 public enum CropType : byte
 {

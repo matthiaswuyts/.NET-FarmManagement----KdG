@@ -1,7 +1,9 @@
-﻿namespace FarmManagement;
+﻿namespace FarmManagement.BL.Domain;
 
 public class Harvest
 {
+    private static int _nextId = 1;
+    public int Id { get; private set; }
     public CropType CropType { get; set; }
     public DateOnly HarvestDate { get; set; }
     public double Quantity { get; set; }
@@ -9,6 +11,7 @@ public class Harvest
 
     public Harvest(CropType cropType, DateOnly harvestDate, double quantity, Farm farm)
     {
+        Id = _nextId++;
         CropType = cropType;
         HarvestDate = harvestDate;
         Quantity = quantity;
