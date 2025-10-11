@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using CA.Extensions;
 using FarmManagement.BL;
 using FarmManagement.BL.Domain;
 namespace CA;
@@ -72,7 +73,7 @@ public class ConsoleUI
         Console.WriteLine("=========");
         foreach (Farm farm in _mgr.GetAllFarms())
         {
-            Console.WriteLine(farm);
+            Console.WriteLine(farm.GetInfo());
         }
 
         Console.WriteLine();
@@ -93,7 +94,7 @@ public class ConsoleUI
         {
             foreach (Farm farm in filtered)
             {
-                Console.WriteLine(farm);
+                Console.WriteLine(farm.GetInfo());
             }
         }
 
@@ -107,7 +108,7 @@ public class ConsoleUI
 
         foreach (Animal animal in _mgr.GetAllAnimals())
         {
-            Console.WriteLine(animal);
+            Console.WriteLine(animal.GetInfo());
         }
 
         Console.WriteLine();
@@ -128,11 +129,11 @@ public class ConsoleUI
 
         string typeInput = Console.ReadLine();
 
-        int? typeResult = null;
+        byte? typeResult = null;
 
         if (!string.IsNullOrEmpty(typeInput))
         {
-            if (int.TryParse(typeInput, out int type) && Enum.IsDefined(typeof(AnimalType), type))
+            if (byte.TryParse(typeInput, out byte type) && Enum.IsDefined(typeof(AnimalType), type))
             {
                 typeResult = type;
             }
@@ -173,7 +174,7 @@ public class ConsoleUI
         {
             foreach (Animal animal in filtered)
             {
-                Console.WriteLine(animal);
+                Console.WriteLine(animal.GetInfo());
             }
         }
 
@@ -238,7 +239,70 @@ public class ConsoleUI
 
     private void AddAnimal()
     {
-        
+        Console.WriteLine("Add animal");
+        Console.WriteLine("========");
+
+
+        while (true)
+        {
+
+            Console.Write("Species: ");
+            string inputSpecies = Console.ReadLine();
+
+            Console.Write("Lifespan (years): ");
+            string inputLifespan = Console.ReadLine();
+            if (!int.TryParse(inputLifespan, out int lifespan))
+            {
+                Console.WriteLine("Please enter a valid number for lifespan.");
+                continue;
+            }
+
+            Console.Write("Average weight (kg): ");
+            string inputAverageWeight = Console.ReadLine();
+
+            if (!double.TryParse(inputAverageWeight, out double averageWeight))
+            {
+                Console.WriteLine("Please enter a valid number for average weight.");
+                continue;
+            }
+            
+            Console.Write("Type: ");
+            AnimalType[] types = (AnimalType[])Enum.GetValues(typeof(AnimalType));
+            for (int i = 0; i < types.Length; i++)
+            {
+                Console.Write($"{(int)types[i]}={types[i]}");
+                if (i < types.Length - 1)
+                    Console.Write(", ");
+            }
+
+            Console.Write(": ");
+
+            string typeInput = Console.ReadLine();
+
+            if (!byte.TryParse(typeInput, out byte type) || !Enum.IsDefined(typeof(AnimalType), type))
+            {
+                Console.WriteLine("Please enter a number between 1 and " + types.Length);
+                continue;
+            }
+            
+            AnimalType selectedType = (AnimalType)type;
+            
+            try
+            {
+                Animal newAnimal = _mgr.AddAnimal(inputSpecies, lifespan, averageWeight, selectedType);
+                Console.WriteLine("Animal added successfully.");
+                break;
+            }
+            catch (ValidationException exception)
+            {
+                string[] errorMessages = exception.Message.Split("|");
+                foreach (string errorMessage in errorMessages)
+                {
+                    Console.WriteLine($"Error: {errorMessage}");
+                    Console.WriteLine("Please try again...");
+                }
+            }
+        }
     }
 
 

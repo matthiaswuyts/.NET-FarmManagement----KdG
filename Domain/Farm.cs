@@ -3,8 +3,7 @@
 namespace FarmManagement.BL.Domain;
 public class Farm : IValidatableObject
 {
-    private static int _nextId = 1;
-    public int Id { get; private set; }
+    public int Id { get; set; }
     
     [Required]
     [StringLength(50, MinimumLength = 3)]
@@ -24,7 +23,6 @@ public class Farm : IValidatableObject
 
     public Farm(string name, string location, int establisedYear,double? sizeInHectares = null)
     {
-        Id = _nextId++;
         Name = name;
         Location = location;
         SizeInHectares = sizeInHectares;
@@ -33,11 +31,17 @@ public class Farm : IValidatableObject
         Animals = new List<Animal>();
     }
 
-    public override string ToString()
+    public Farm(int id,string name, string location, int establishedYear, double? sizeInHectares = null)
     {
-        return $"Farm: {Name} (ID: {Id}) located in {Location} with {(SizeInHectares.HasValue ? $"{SizeInHectares} hectares" : "unknown size of hectares")}. Founded in {EstablishedYear} with {Harvests.Count} harvests and {Animals.Count} animals.";
+        Id = id;
+        Name = name;
+        Location = location;
+        SizeInHectares = sizeInHectares;
+        EstablishedYear = establishedYear;
+        Harvests = new List<Harvest>();
+        Animals = new List<Animal>();
     }
-
+    
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         List<ValidationResult> errors = new List<ValidationResult>();

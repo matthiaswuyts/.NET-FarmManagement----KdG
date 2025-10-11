@@ -2,8 +2,7 @@
 
 public class Harvest
 {
-    private static int _nextId = 1;
-    public int Id { get; private set; }
+    public int Id { get; set; }
     public CropType CropType { get; set; }
     public DateOnly HarvestDate { get; set; }
     public double Quantity { get; set; }
@@ -11,17 +10,18 @@ public class Harvest
 
     public Harvest(CropType cropType, DateOnly harvestDate, double quantity, Farm farm)
     {
-        Id = _nextId++;
         CropType = cropType;
         HarvestDate = harvestDate;
         Quantity = quantity;
         Farm = farm;
     }
-
-
-    public override string ToString()
+    public Harvest(int id, CropType cropType, DateOnly harvestDate, double quantity, Farm farm)
     {
-        return $"{CropType} harvest on {HarvestDate.ToShortDateString()} ({Quantity} kg)";
+        CropType = cropType;
+        HarvestDate = harvestDate;
+        Quantity = quantity;
+        Farm = farm;
+        Id = id;
     }
-
+    
 }

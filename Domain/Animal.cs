@@ -4,9 +4,7 @@ namespace FarmManagement.BL.Domain;
 
 public class Animal
 {
-    private static int _nextId = 1;
-
-    public int Id { get; private set; }
+    public int Id { get; set; }
     
     [Range(0.1, 2500)]
     public double AverageWeight { get; set; }
@@ -24,21 +22,22 @@ public class Animal
 
     public Animal(string species, int lifespan, double averageWeight, AnimalType type)
     {
-        Id = _nextId++;
         Species = species;
         Lifespan = lifespan;
         AverageWeight = averageWeight;
         Type = type;
         Farms = new List<Farm>();
     }
-
-
-    public override string ToString()
-    {
-        return $"{Type} (Species: {Species}), Lifespan: {Lifespan} yrs, Avg. weight: {AverageWeight} kg";
-    }
-
     
+    public Animal(int id, string species, int lifespan, double averageWeight, AnimalType type)
+    {
+        Id = id;
+        Species = species;
+        Lifespan = lifespan;
+        AverageWeight = averageWeight;
+        Type = type;
+        Farms = new List<Farm>();
+    }
     
     public void ConnectToFarm(Farm farm)
     {
