@@ -15,13 +15,5 @@ public class Harvest
         Quantity = quantity;
         Farm = farm;
     }
-    public Harvest(int id, CropType cropType, DateOnly harvestDate, double quantity, Farm farm)
-    {
-        CropType = cropType;
-        HarvestDate = harvestDate;
-        Quantity = quantity;
-        Farm = farm;
-        Id = id;
-    }
     
 }

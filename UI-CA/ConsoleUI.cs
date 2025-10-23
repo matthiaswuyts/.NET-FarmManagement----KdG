@@ -2,7 +2,7 @@
 using CA.Extensions;
 using FarmManagement.BL;
 using FarmManagement.BL.Domain;
-namespace CA;
+namespace FarmManagement.UI.CA;
 
 public class ConsoleUI
 {
@@ -76,7 +76,7 @@ public class ConsoleUI
         Console.Write("Enter location: ");
         string location = Console.ReadLine();
 
-        IEnumerable<Farm> filtered = _mgr.GetFarmsByLocation(location).ToList();
+        IEnumerable<Farm> filtered = _mgr.GetFarmsByLocation(location);
 
         if (!filtered.Any())
         {
@@ -113,11 +113,11 @@ public class ConsoleUI
 
         string typeInput = Console.ReadLine();
 
-        byte? typeResult = null;
+        AnimalType? typeResult = null;
 
         if (!string.IsNullOrEmpty(typeInput))
         {
-            if (byte.TryParse(typeInput, out byte type) && Enum.IsDefined(typeof(AnimalType), type))
+            if (Enum.TryParse(typeInput, out AnimalType type))
             {
                 typeResult = type;
             }
@@ -147,8 +147,8 @@ public class ConsoleUI
                 return;
             }
         }
-        
-        IEnumerable<Animal> filtered = _mgr.GetAnimalsByTypeAndLifespan(typeResult, minimumLifespan).ToList();
+
+        IEnumerable<Animal> filtered = _mgr.GetAnimalsByTypeAndLifespan(typeResult, minimumLifespan);
 
         if (!filtered.Any())
         {

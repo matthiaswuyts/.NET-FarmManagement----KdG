@@ -1,6 +1,6 @@
 ﻿using FarmManagement.BL;
 using FarmManagement.DAL;
-using CA;
+using FarmManagement.UI.CA;
 
 
 DummyDataSeeder seeder = new DummyDataSeeder();

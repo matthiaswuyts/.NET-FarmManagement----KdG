@@ -54,7 +54,7 @@ public class Manager : IManager
         return _repository.ReadAllAnimals();
     }
 
-    public IEnumerable<Animal> GetAnimalsByTypeAndLifespan(int? type, int? minimumLifespan)
+    public IEnumerable<Animal> GetAnimalsByTypeAndLifespan(AnimalType? type, int? minimumLifespan)
     {
         return _repository.ReadAnimalsByTypeAndLifespan(type, minimumLifespan);
     }

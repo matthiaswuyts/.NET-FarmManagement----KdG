@@ -30,17 +30,6 @@ public class Farm : IValidatableObject
         Harvests = new List<Harvest>();
         Animals = new List<Animal>();
     }
-
-    public Farm(int id,string name, string location, int establishedYear, double? sizeInHectares = null)
-    {
-        Id = id;
-        Name = name;
-        Location = location;
-        SizeInHectares = sizeInHectares;
-        EstablishedYear = establishedYear;
-        Harvests = new List<Harvest>();
-        Animals = new List<Animal>();
-    }
     
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {

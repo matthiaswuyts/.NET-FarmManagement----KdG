@@ -5,8 +5,8 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
-        <AssemblyName>UI-CA</AssemblyName>
-        <RootNamespace>CA</RootNamespace>
+        <AssemblyName>FarmManagement.UI.CA</AssemblyName>
+        <RootNamespace>FarmManagement.UI.CA</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

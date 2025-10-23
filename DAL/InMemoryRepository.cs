@@ -63,12 +63,12 @@ public class InMemoryRepository : IRepository
         return Animals;
     }
 
-    public IEnumerable<Animal> ReadAnimalsByTypeAndLifespan(int? type, int? minimumLifespan)
+    public IEnumerable<Animal> ReadAnimalsByTypeAndLifespan(AnimalType? type, int? minimumLifespan)
     {
         List<Animal> filtered = new List<Animal>();
         foreach (Animal animal in Animals)
         {
-            bool matchesType = !type.HasValue || (int)animal.Type == type.Value;
+            bool matchesType = !type.HasValue || animal.Type == type.Value;
             bool matchesLifespan = !minimumLifespan.HasValue || animal.Lifespan >= minimumLifespan.Value;
 
             if (matchesType && matchesLifespan)

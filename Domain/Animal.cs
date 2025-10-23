@@ -29,15 +29,7 @@ public class Animal
         Farms = new List<Farm>();
     }
     
-    public Animal(int id, string species, int lifespan, double averageWeight, AnimalType type)
-    {
-        Id = id;
-        Species = species;
-        Lifespan = lifespan;
-        AverageWeight = averageWeight;
-        Type = type;
-        Farms = new List<Farm>();
-    }
+
     
     public void ConnectToFarm(Farm farm)
     {

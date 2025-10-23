@@ -1,11 +1,14 @@
 ﻿using FarmManagement.BL.Domain;
-namespace FarmManagement.DAL;
 
-public class DummyDataSeeder
+namespace FarmManagement.DAL.EF;
+
+public static class DataSeeder
 {
-    public void Seed()
+
+   
+    public static void Seed(FarmManagementDbContext farmManagementDbContext)
     {
-        // Farms
+  // Farms
         Farm sunnyMeadowFarm = new Farm("Sunny Meadow Farm", "Netherlands", 1995, 50);
         Farm greenValleyEstate = new Farm("Green Valley Estate", "Belgium", 2000, 74.2);
         Farm oldOakHomestead = new Farm("Old Oak Homestead", "Germany", 1980);
@@ -13,7 +16,7 @@ public class DummyDataSeeder
         
 
         // Adding to list
-        InMemoryRepository.Farms.AddRange(new Farm[] { sunnyMeadowFarm, greenValleyEstate, oldOakHomestead, riverbendFarmstead });
+        farmManagementDbContext.Farms.AddRange(new Farm[] { sunnyMeadowFarm, greenValleyEstate, oldOakHomestead, riverbendFarmstead });
         // Animals
         Animal holsteinCow = new Animal("Holstein", 10, 500, AnimalType.Cow);
         Animal jerseyCow = new Animal("Jersey", 12, 520, AnimalType.Cow);
@@ -39,7 +42,7 @@ public class DummyDataSeeder
 
 
 
-        InMemoryRepository.Animals.AddRange(new Animal[]
+        farmManagementDbContext.Animals.AddRange(new Animal[]
         {
             holsteinCow, jerseyCow, angusCow, berkshirePig, largeWhitePig, durocPig, silkieChicken, leghornChicken, rhodeIslandChicken, merinoSheep, suffolkSheep, alpineGoat, boerGoat, friesianHorse, arabianHorse, thoroughbredHorse
         });
@@ -93,5 +96,8 @@ public class DummyDataSeeder
         riverbendFarmstead.Harvests.Add(new Harvest(CropType.Apple, new DateOnly(2020, 9, 21), 12500.75, riverbendFarmstead));
         riverbendFarmstead.Harvests.Add(new Harvest(CropType.Tomato, new DateOnly(2021, 10, 5), 5800.10, riverbendFarmstead));
 
+
+        farmManagementDbContext.SaveChanges();
+        farmManagementDbContext.ChangeTracker.Clear();
     }
 }

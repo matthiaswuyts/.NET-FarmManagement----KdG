@@ -10,6 +10,6 @@ public interface IManager
     
     public Animal GetAnimal(int id);
     public IEnumerable<Animal> GetAllAnimals();
-    public IEnumerable<Animal> GetAnimalsByTypeAndLifespan(int? type, int? minimumLifespan);
+    public IEnumerable<Animal> GetAnimalsByTypeAndLifespan(AnimalType? type, int? minimumLifespan);
     public Animal AddAnimal(string species, int lifespan, double averageWeight, AnimalType type);
 }

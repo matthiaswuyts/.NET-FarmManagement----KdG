@@ -10,6 +10,6 @@ public interface IRepository
     
     public Animal ReadAnimal(int id);
     public IEnumerable<Animal> ReadAllAnimals();
-    public IEnumerable<Animal> ReadAnimalsByTypeAndLifespan(int? type, int? minimumLifespan);
+    public IEnumerable<Animal> ReadAnimalsByTypeAndLifespan(AnimalType? type, int? minimumLifespan);
     public void CreateAnimal(Animal animal);
 }
