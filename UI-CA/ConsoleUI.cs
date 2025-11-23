@@ -53,20 +53,73 @@ public class ConsoleUI
                 case 6:
                     AddAnimal();
                     break;
+                case 7:
+                    AddAnimalToFarm();
+                    break;
+                case 8:
+                    RemoveAnimalFromFarm();
+                    break;
                 default:
                     Console.WriteLine("Please enter a number between 0 and 6.");
                     break;
             }
         }
     }
-    
+
+    private void AddAnimalToFarm()
+    {
+        var allFarms = _mgr.GetAllFarms();
+        var allAnimals = _mgr.GetAllAnimals();
+        Console.WriteLine("Which farm would you like to add an animal to?");
+        foreach (Farm farm in allFarms)
+        {
+            Console.WriteLine($"[{farm.Id}] {farm.Name}]");
+        }
+
+        Console.Write("Enter a farm ID: ");
+
+        if (!Int32.TryParse(Console.ReadLine(), out int farmId) || farmId < 1 || farmId > allFarms.Count())
+        {
+            Console.WriteLine("Please enter a valid farm ID.");
+            Console.WriteLine();
+            return;
+        }
+
+        Console.WriteLine();
+        
+        Console.WriteLine("Which animal would you like to add?");
+        foreach (Animal animal in allAnimals)
+        {
+            Console.WriteLine($"[{animal.Id}] {animal.Species} {animal.Type}");
+        }
+
+        Console.WriteLine();
+        
+        Console.Write("Enter animal ID: ");
+
+        if (!Int32.TryParse(Console.ReadLine(), out int animalId) || animalId < 1 || animalId > allAnimals.Count())
+        {
+            Console.WriteLine("Please enter a valid animal ID.");
+            Console.WriteLine();
+            return;
+        }
+        
+        _mgr.AddFarmAnimal(farmId, animalId);
+    }
+
+    private void RemoveAnimalFromFarm()
+    {
+        throw new NotImplementedException();
+    }
+
     private void ShowAllFarms()
     {
         Console.WriteLine("All Farms");
         Console.WriteLine("=========");
-        foreach (Farm farm in _mgr.GetAllFarms())
+        foreach (Farm farm in _mgr.GetAllFarmsWithHarvests())
         {
             Console.WriteLine(farm.GetInfo());
+            Console.WriteLine();
         }
 
         Console.WriteLine();
@@ -99,9 +152,10 @@ public class ConsoleUI
         Console.WriteLine("All Animals");
         Console.WriteLine("===========");
 
-        foreach (Animal animal in _mgr.GetAllAnimals())
+        foreach (Animal animal in _mgr.GetAllAnimalsWithFarms())
         {
             Console.WriteLine(animal.GetInfo());
+            Console.WriteLine();
         }
 
         Console.WriteLine();
@@ -293,8 +347,11 @@ public class ConsoleUI
         Console.WriteLine("4) Show all animals of type and/or minimum lifespan");
         Console.WriteLine("5) Add a Farm");
         Console.WriteLine("6) Add a Animal");
+        Console.WriteLine("7) Add an animal to farm");
+        Console.WriteLine("8) Remove animal from farm");
+        
 
-        Console.Write("Choice (0-6): ");
+        Console.Write("Choice (0-8): ");
     }
     
     private AnimalType[] ShowAnimalTypes()

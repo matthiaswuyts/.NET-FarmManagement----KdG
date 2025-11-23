@@ -60,6 +60,44 @@ public class Manager : IManager
         return animalToCreate;
     }
 
+    public IEnumerable<Animal> GetAllAnimalsWithFarms()
+    {
+        return _repository.ReadAllAnimalsWithFarms();
+    }
+
+    public IEnumerable<Farm> GetAllFarmsWithHarvests()
+    {
+        return _repository.ReadAllFarmsWithHarvests();
+    }
+
+    public void RemoveFarmAnimal(int farmId, int animalId)
+    {
+       _repository.DeleteFarmAnimal(farmId, animalId);
+    }
+
+  
+
+    public void AddFarmAnimal(int farmId, int animalId, int count = 1)
+    {
+        var farm =  _repository.ReadFarm(farmId);
+        var animal = _repository.ReadAnimal(animalId);
+
+        var farmAnimal = new FarmAnimal
+        {
+            Farm = farm,
+            Animal = animal,
+            Count = count
+        };
+        
+        
+        _repository.CreateFarmAnimal(farmAnimal);
+    }
+
+    public IEnumerable<Farm> GetAnimalsOfFarm(int animalId)
+    {
+        return _repository.ReadAnimalsOfFarm(animalId);    
+    }
+
     private void ValidateEntity(object entity)
     {
         List<ValidationResult> errors = new List<ValidationResult>();

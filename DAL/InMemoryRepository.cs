@@ -84,4 +84,29 @@ public class InMemoryRepository : IRepository
         //animal.Id = Animals.Count + 1;
         Animals.Add(animal);
     }
+
+    public IEnumerable<Farm> ReadAllFarmsWithHarvests()
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<Animal> ReadAllAnimalsWithFarms()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void CreateFarmAnimal(FarmAnimal farmAnimal)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DeleteFarmAnimal(int farmId, int animalId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<Farm> ReadAnimalsOfFarm(int animalId)
+    {
+        throw new NotImplementedException();
+    }
 }

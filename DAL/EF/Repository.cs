@@ -1,4 +1,5 @@
 ﻿using FarmManagement.BL.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace FarmManagement.DAL.EF;
 
@@ -64,5 +65,43 @@ public class Repository : IRepository
         _ctx.Animals.Add(animal);
         _ctx.SaveChanges();
 
+    }
+
+    public IEnumerable<Farm> ReadAllFarmsWithHarvests()
+    {
+        return _ctx.Farms.Include(f => f.Harvests).ToList();
+    }
+
+    public IEnumerable<Animal> ReadAllAnimalsWithFarms()
+    {
+        return _ctx.Animals.Include(a => a.FarmAnimals).ThenInclude(fa => fa.Farm).ToList();
+    }
+
+    public void CreateFarmAnimal(FarmAnimal farmAnimal)
+    {
+        _ctx.FarmAnimals.Add(farmAnimal);
+        _ctx.SaveChanges();
+    }
+
+    public void DeleteFarmAnimal(int farmId, int animalId)
+    {
+        var farmAnimal = _ctx.FarmAnimals
+            .Include(fa => fa.Farm)
+            .Include(fa => fa.Animal)
+            .FirstOrDefault(fa => fa.Farm.Id == farmId && fa.Animal.Id == animalId);
+
+        if (farmAnimal != null)
+        {
+            _ctx.FarmAnimals.Remove(farmAnimal);
+            _ctx.SaveChanges();
+        }
+       
+    }
+
+    public IEnumerable<Farm> ReadAnimalsOfFarm(int animalId)
+    {
+        return _ctx.Farms
+            .Where(f => f.FarmAnimals.Any(fa => fa.Animal.Id == animalId))
+            .ToList();
     }
 }

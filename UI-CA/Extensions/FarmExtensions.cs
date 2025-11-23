@@ -6,6 +6,21 @@ public static class FarmExtensions
 {
     public static string GetInfo(this Farm farm)
     {
-        return $"Farm: {farm.Name} (ID: {farm.Id}) located in {farm.Location} with {(farm.SizeInHectares.HasValue ? $"{farm.SizeInHectares} hectares" : "unknown size of hectares")}. Founded in {farm.EstablishedYear} with {(farm.Harvests == null || !farm.Harvests.Any() ? "UNKNOWN" : farm.Harvests.Count.ToString())} harvests and {(farm.FarmAnimals == null || !farm.FarmAnimals.Any() ? "UNKNOWN" : farm.FarmAnimals.Count.ToString())} animals.";
+        var info = $"Farm {farm.Name}, active since {farm.EstablishedYear}, located in {farm.Location} with {(farm.SizeInHectares.HasValue ? $"{farm.SizeInHectares} hectares" : "an unknown size of hectares")}.";
+        if (farm.Harvests != null && farm.Harvests.Any())
+        {
+            info += "\nHarvests";
+            foreach (Harvest harvest in farm.Harvests)
+            {
+                info += "\n- " + harvest.GetInfo();
+            }
+        }
+        else
+        {
+            info += "\nNo harvests recored.";
+        }
+
+        return info;
     }
+
 }

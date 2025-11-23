@@ -12,4 +12,13 @@ public interface IManager
     public IEnumerable<Animal> GetAllAnimals();
     public IEnumerable<Animal> GetAnimalsByTypeAndLifespan(AnimalType? type, int? minimumLifespan);
     public Animal AddAnimal(string species, int lifespan, double averageWeight, AnimalType type);
+    
+    public IEnumerable<Animal> GetAllAnimalsWithFarms();
+    public IEnumerable<Farm> GetAllFarmsWithHarvests();
+
+    public void RemoveFarmAnimal(int farmId, int animalId);
+
+    public void AddFarmAnimal(int farmId, int animalId, int count = 1);
+    
+    public IEnumerable<Farm> GetAnimalsOfFarm(int farmId);
 }

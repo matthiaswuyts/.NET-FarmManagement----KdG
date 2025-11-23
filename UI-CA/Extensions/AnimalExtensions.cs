@@ -6,6 +6,21 @@ public static class AnimalExtensions
 {
     public static string GetInfo(this Animal animal)
     {
-        return $"{animal.Type} (ID: {animal.Id}) (Species: {animal.Species}), Lifespan: {animal.Lifespan} yrs, Avg. weight: {animal.AverageWeight} kg";
+        var info = $"{animal.Type} (Species: {animal.Species}), Lifespan: {animal.Lifespan} yrs, Avg. weight: {animal.AverageWeight} kg";
+
+        if (animal.FarmAnimals != null && animal.FarmAnimals.Any())
+        {
+            foreach (var fa in animal.FarmAnimals)
+            {
+                info += $"\n  - {fa.Farm?.Name ?? "UNKNOWN"}: {fa.Count} {animal.Species} {animal.Type}{(fa.Count > 1 ? "s" : "")}";
+            }
+        }
+        else
+        {
+            info += "\n  - No farms";
+        }
+
+        return info;
     }
+
 }
