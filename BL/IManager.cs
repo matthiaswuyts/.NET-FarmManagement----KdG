@@ -20,5 +20,7 @@ public interface IManager
 
     public void AddFarmAnimal(int farmId, int animalId, int count = 1);
     
-    public IEnumerable<Farm> GetAnimalsOfFarm(int farmId);
+    public IEnumerable<Animal> GetAnimalsOfFarm(int farmId);
+    
+    public FarmAnimal GetFarmAnimal(int farmId, int animalId);
 }

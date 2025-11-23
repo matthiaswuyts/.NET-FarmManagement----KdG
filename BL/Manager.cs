@@ -93,9 +93,14 @@ public class Manager : IManager
         _repository.CreateFarmAnimal(farmAnimal);
     }
 
-    public IEnumerable<Farm> GetAnimalsOfFarm(int animalId)
+    public IEnumerable<Animal> GetAnimalsOfFarm(int farmId)
     {
-        return _repository.ReadAnimalsOfFarm(animalId);    
+        return _repository.ReadAnimalsOfFarm(farmId);    
+    }
+
+    public FarmAnimal GetFarmAnimal(int farmId, int animalId)
+    {
+       return _repository.ReadFarmAnimal(farmId, animalId);
     }
 
     private void ValidateEntity(object entity)

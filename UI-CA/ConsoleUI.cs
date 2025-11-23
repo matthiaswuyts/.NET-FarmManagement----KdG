@@ -78,7 +78,7 @@ public class ConsoleUI
 
         Console.Write("Enter a farm ID: ");
 
-        if (!Int32.TryParse(Console.ReadLine(), out int farmId) || farmId < 1 || farmId > allFarms.Count())
+        if (!Int32.TryParse(Console.ReadLine(), out int farmId) || !allFarms.Any(f => f.Id == farmId))
         {
             Console.WriteLine("Please enter a valid farm ID.");
             Console.WriteLine();
@@ -97,9 +97,18 @@ public class ConsoleUI
         
         Console.Write("Enter animal ID: ");
 
-        if (!Int32.TryParse(Console.ReadLine(), out int animalId) || animalId < 1 || animalId > allAnimals.Count())
+        if (!Int32.TryParse(Console.ReadLine(), out int animalId) || !allAnimals.Any(a => a.Id == animalId))
         {
             Console.WriteLine("Please enter a valid animal ID.");
+            Console.WriteLine();
+            return;
+        }
+        
+        var existingRel = _mgr.GetFarmAnimal(farmId, animalId);
+
+        if (existingRel != null)
+        {
+            Console.WriteLine("This Animal has already been added to this Farm");
             Console.WriteLine();
             return;
         }
@@ -109,7 +118,44 @@ public class ConsoleUI
 
     private void RemoveAnimalFromFarm()
     {
-        throw new NotImplementedException();
+        var allFarms = _mgr.GetAllFarms();
+        Console.WriteLine("Which farm would you like to remove an animal from?");
+        foreach (Farm farm in allFarms)
+        {
+            Console.WriteLine($"[{farm.Id}] {farm.Name}]");
+        }
+
+        Console.Write("Enter a farm ID: ");
+        
+        if (!Int32.TryParse(Console.ReadLine(), out int farmId) || !allFarms.Any(f => f.Id == farmId))
+        {
+            Console.WriteLine("Please enter a valid farm ID.");
+            Console.WriteLine();
+            return;
+        }
+
+        Console.WriteLine();
+        
+        var animalsFromFarm = _mgr.GetAnimalsOfFarm(farmId);
+        Console.WriteLine("Which animal would you like to remove?");
+        
+        foreach (Animal animal in animalsFromFarm)
+        {
+            Console.WriteLine($"[{animal.Id}] {animal.Species} {animal.Type}");
+        }
+
+        Console.WriteLine();
+        
+        Console.Write("Enter animal ID: ");
+        
+        if (!Int32.TryParse(Console.ReadLine(), out int animalId) ||!animalsFromFarm.Any(a => a.Id == animalId))
+        {
+            Console.WriteLine("Please enter a valid animal ID.");
+            Console.WriteLine();
+            return;
+        }
+        
+        _mgr.RemoveFarmAnimal(farmId, animalId);
     }
 
     private void ShowAllFarms()

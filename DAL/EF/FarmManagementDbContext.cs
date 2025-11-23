@@ -46,13 +46,13 @@ public class FarmManagementDbContext : DbContext
         modelBuilder.Entity<FarmAnimal>()
             .HasOne(fa => fa.Farm)
             .WithMany(f => f.FarmAnimals)
-            .HasForeignKey("FkFarmId")
+            .HasForeignKey(fa => fa.FkFarmId)
             .IsRequired();
         
         modelBuilder.Entity<FarmAnimal>()
             .HasOne(fa => fa.Animal)
             .WithMany(a => a.FarmAnimals)
-            .HasForeignKey("FkAnimalId")
+            .HasForeignKey(fa => fa.FkAnimalId)
             .IsRequired();
         
         modelBuilder.Entity<Harvest>()
@@ -60,9 +60,6 @@ public class FarmManagementDbContext : DbContext
             .WithMany(h => h.Harvests)
             .HasForeignKey(h => h.FarmId)
             .IsRequired();
-            
-        
-        
         
         modelBuilder.Entity<FarmAnimal>().HasKey("FkFarmId","FkAnimalId");
 

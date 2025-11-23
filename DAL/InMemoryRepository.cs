@@ -105,7 +105,12 @@ public class InMemoryRepository : IRepository
         throw new NotImplementedException();
     }
 
-    public IEnumerable<Farm> ReadAnimalsOfFarm(int animalId)
+    public IEnumerable<Animal> ReadAnimalsOfFarm(int animalId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public FarmAnimal ReadFarmAnimal(int farmId, int animalId)
     {
         throw new NotImplementedException();
     }

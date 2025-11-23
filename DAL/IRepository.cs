@@ -20,5 +20,7 @@ public interface IRepository
     public void CreateFarmAnimal(FarmAnimal farmAnimal);
     public void DeleteFarmAnimal(int farmId, int animalId);
     
-    public IEnumerable<Farm> ReadAnimalsOfFarm(int farmId);
+    public IEnumerable<Animal> ReadAnimalsOfFarm(int farmId);
+    
+    public FarmAnimal ReadFarmAnimal(int farmId, int animalId);
 }
