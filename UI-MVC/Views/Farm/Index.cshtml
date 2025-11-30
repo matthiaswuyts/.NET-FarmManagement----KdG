@@ -1,0 +1,30 @@
+﻿@model IEnumerable<FarmManagement.BL.Domain.Farm>
+
+@{
+     ViewData["Title"] = "Lijst van Farms";
+}
+
+     <h1>All Farms</h1> 
+     <table class="table">
+          <thead>
+          <tr>
+               <th>Name</th>
+               <th>Location</th>
+               <th>Size in Hectares</th>
+               <th>Established Year</th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach (var farm in Model)
+          {
+               <tr>
+                    <td>@farm.Name</td>
+                    <td>@farm.Location</td>
+                    <td>@(farm.SizeInHectares.HasValue ? $"{farm.SizeInHectares}": "Unknown" )</td>
+                    <td>@farm.EstablishedYear</td>
+                    <td>@Html.ActionLink("Details","Details",new { farmId = farm.Id})</td>
+               </tr>
+          }
+          </tbody>
+     </table>
+
