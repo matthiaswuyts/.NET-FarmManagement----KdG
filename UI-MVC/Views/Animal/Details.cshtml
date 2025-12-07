@@ -1,0 +1,31 @@
+﻿@model FarmManagement.BL.Domain.Animal
+
+@{
+    ViewBag.Title = "Details Animal";
+}
+
+<h2 class="mb-3">Animal Details</h2>
+<div>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>&nbsp;</td>
+            <td>@Model.Type</td>
+        </tr>
+        <tr>
+            <th>Species</th>
+            <td>&nbsp;</td>
+            <td>@Model.Species</td>
+        </tr>
+        <tr>
+            <th>Lifespan</th>
+            <td>&nbsp;</td>
+            <td>@Model.Lifespan <text>yrs</text></td>
+        </tr>
+        <tr>
+            <th>Average weight</th>
+            <td>&nbsp;</td>
+            <td>@Model.AverageWeight <text>kg</text></td>
+        </tr>
+    </table>
+</div>

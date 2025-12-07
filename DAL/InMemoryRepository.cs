@@ -114,5 +114,9 @@ public class InMemoryRepository : IRepository
     {
         throw new NotImplementedException();
     }
-    
+
+    public Farm ReadFarmWithAnimals(int farmId)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -23,4 +23,6 @@ public interface IManager
     public IEnumerable<Animal> GetAnimalsOfFarm(int farmId);
     
     public FarmAnimal GetFarmAnimal(int farmId, int animalId);
+
+    public Farm GetFarmWithAnimals(int farmId);
 }

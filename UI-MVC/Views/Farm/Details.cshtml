@@ -1,6 +1,72 @@
 ﻿@model FarmManagement.BL.Domain.Farm
 
 
+@{
+    ViewData["Title"] = "Details Farm";
+}
+
+<h2 class="mb-3">Farm Details</h2>
 <div>
-      @Model.EstablishedYear
+    <table>
+        <tr>
+            <th>Name</th>
+            <td>&nbsp;</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th>Location</th>
+            <td>&nbsp;</td>
+            <td>@Model.Location</td>
+        </tr>
+        <tr>
+            <th>Size in Hectares</th>
+            <td>&nbsp;</td>
+            <td>@(Model.SizeInHectares.HasValue ? $"{Model.SizeInHectares}" : "Unknown")</td>
+        </tr>
+        <tr>
+            <th>Established Year</th>
+            <td>&nbsp;</td>
+            <td>@Model.EstablishedYear</td>
+        </tr>
+    </table>
 </div>
+
+<h2 class="mt-3">Animals</h2>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Count</th>
+            <th>Type</th>
+            <th>Species</th>
+            <th>Lifespan</th>
+            <th>Average weight</th>
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        @if (Model.FarmAnimals != null && Model.FarmAnimals.Any())
+        {
+            @foreach (var animalItem in Model.FarmAnimals)
+            {
+                <tr>
+                    <td>@animalItem.Count</td>
+                    <td>@animalItem.Animal.Type</td>
+                    <td>@animalItem.Animal.Species</td>
+                    <td>@animalItem.Animal.Lifespan <text>yrs</text></td>
+                    <td>@animalItem.Animal.AverageWeight <text>kg</text></td>
+                    <td><a asp-controller="Animal" asp-action="Details" asp-route-animalId="@animalItem.Animal.Id">Details</a></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center text-muted">
+                   No animals found on this farm 
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+

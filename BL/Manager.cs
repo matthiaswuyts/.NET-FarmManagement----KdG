@@ -104,6 +104,11 @@ public class Manager : IManager
        return _repository.ReadFarmAnimal(farmId, animalId);
     }
 
+    public Farm GetFarmWithAnimals(int farmId)
+    {
+        return _repository.ReadFarmWithAnimals(farmId);
+    }
+
     private void ValidateEntity(object entity)
     {
         List<ValidationResult> errors = new List<ValidationResult>();

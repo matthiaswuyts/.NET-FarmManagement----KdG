@@ -108,4 +108,12 @@ public class Repository : IRepository
         return _ctx.FarmAnimals.Find(farmId, animalId);
     }
 
+    public Farm ReadFarmWithAnimals(int farmId)
+    {
+        return _ctx.Farms
+            .Include(f => f.FarmAnimals)
+            .ThenInclude(fa => fa.Animal)
+            .SingleOrDefault(f => f.Id == farmId);
+    }
+
 }

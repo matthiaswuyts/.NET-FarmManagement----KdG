@@ -1,4 +1,6 @@
 ﻿using FarmManagement.BL;
+using FarmManagement.BL.Domain;
+using FarmManagement.UI.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FarmManagement.UI.Web.Controllers;
@@ -11,20 +13,39 @@ public class FarmController : Controller
     {
         _manager = manager;
     }
+    
+    [HttpGet]
     public IActionResult Index()
     {
         var farms = _manager.GetAllFarms();
         return View(farms);
     }
-
+    
+    
+    [HttpGet]
+    public IActionResult Details(int farmId)
+    {
+        var farm = _manager.GetFarmWithAnimals(farmId);
+        return View(farm);
+    }
+    
     public IActionResult Add()
     {
         return View();
     }
 
-    public IActionResult Details(int farmId)
+    [HttpPost]
+    public IActionResult Add(NewFarmViewModel newFarm)
     {
-        var farm = _manager.GetFarm(farmId);
-        return View(farm);
+        if (!ModelState.IsValid)
+        {
+            return View(newFarm);
+        }
+        
+        var addedFarm = _manager.AddFarm(newFarm.Name,newFarm.Location, newFarm.EstablishedYear,newFarm.SizeInHectares);
+
+        return RedirectToAction("Details", new {farmId = addedFarm.Id});
     }
+    
+    
 }

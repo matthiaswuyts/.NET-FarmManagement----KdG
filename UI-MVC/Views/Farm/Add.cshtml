@@ -1,7 +1,36 @@
-﻿@model dynamic
+﻿@model NewFarmViewModel
 
+@{
+    ViewData["Title"] = "Add Farm";
+}
 
+<h2 class="mb-4">Add Farm</h2>
 
-<div>
-      
-</div>
+<form asp-controller="Farm" asp-action="Add" method="post">
+    
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Enter farm name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    
+    <div class="mb-3">
+        <label asp-for="EstablishedYear" class="form-label">Established Year</label>
+        <input asp-for="EstablishedYear" type="number" class="form-control" placeholder="xxxx"> 
+        <span asp-validation-for="EstablishedYear" class="text-danger"></span>
+    </div>
+    
+    <div class="mb-3">
+        <label asp-for="Location" class="form-label">Location</label>
+        <input asp-for="Location" class="form-control" placeholder="e.g., Netherlands">
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+    
+    <div class="mb-3">
+        <label asp-for="SizeInHectares" class="form-label">Size in Hectares</label>
+        <input asp-for="SizeInHectares" type="number" step="0.01" class="form-control"> 
+        <span asp-validation-for="SizeInHectares" class="text-danger"></span>
+    </div>
+    
+    <button type="submit" class="btn btn-secondary">Save</button>
+</form>
