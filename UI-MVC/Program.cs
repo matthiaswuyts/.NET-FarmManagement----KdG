@@ -29,9 +29,7 @@ using (var scope = app.Services.CreateScope())
 {
     bool executeDropDatabase = true;
     FarmManagementDbContext farmManagementDbContext = scope.ServiceProvider.GetService<FarmManagementDbContext>();
-    if(executeDropDatabase)
-        farmManagementDbContext.Database.EnsureDeleted();
-    bool isDbCreated = farmManagementDbContext.Database.EnsureCreated();
+    bool  isDbCreated = farmManagementDbContext.CreateDatabase(executeDropDatabase);
     if (isDbCreated)
     {
         DataSeeder.Seed(farmManagementDbContext);
