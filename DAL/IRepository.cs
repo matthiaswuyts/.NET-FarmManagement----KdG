@@ -29,4 +29,8 @@ public interface IRepository
     public IEnumerable<Harvest> ReadAllHarvests();
     
     public void CreateHarvest(Harvest harvest);
+    
+    public IEnumerable<Farm> ReadFarmsOfAnimal(int animalId);
+
+    public IEnumerable<Farm> ReadAvailableFarmsOfAnimal(int animalId);
 }

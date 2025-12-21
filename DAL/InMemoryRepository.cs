@@ -129,4 +129,14 @@ public class InMemoryRepository : IRepository
     {
         throw new NotImplementedException();
     }
+
+    public IEnumerable<Farm> ReadFarmsOfAnimal(int animalId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<Farm> ReadAvailableFarmsOfAnimal(int animalId)
+    {
+        throw new NotImplementedException();
+    }
 }

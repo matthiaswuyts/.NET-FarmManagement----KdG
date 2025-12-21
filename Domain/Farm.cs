@@ -19,8 +19,8 @@ public class Farm : IValidatableObject
     
     [RegularExpression(@"^\d{4}$", ErrorMessage = "exactly 4 digits")]
     public int EstablishedYear { get; set; }
-    
-    public ICollection<Harvest> Harvests { get; set; } = new List<Harvest>();
+
+    public ICollection<Harvest> Harvests { get; set; } = [];
 
     public ICollection<FarmAnimal> FarmAnimals { get; set; } = [];
 

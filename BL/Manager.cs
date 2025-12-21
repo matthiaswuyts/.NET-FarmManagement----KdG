@@ -77,10 +77,21 @@ public class Manager : IManager
 
   
 
-    public void AddFarmAnimal(int farmId, int animalId, int count = 1)
+    public FarmAnimal AddFarmAnimal(int farmId, int animalId, int count = 1)
     {
-        var farm =  _repository.ReadFarm(farmId);
+        var farm = _repository.ReadFarm(farmId);
+        // DEBUG CHECK 1:
+        if (farm == null) 
+        {
+            throw new Exception($"CRITICAl ERROR: Farm met ID {farmId} is niet gevonden in de database! Check je IDs.");
+        }
+
         var animal = _repository.ReadAnimal(animalId);
+        // DEBUG CHECK 2:
+        if (animal == null) 
+        {
+            throw new Exception($"CRITICAL ERROR: Animal met ID {animalId} is niet gevonden in de database!");
+        }
 
         var farmAnimal = new FarmAnimal
         {
@@ -92,6 +103,7 @@ public class Manager : IManager
         ValidateEntity(farmAnimal);
         
         _repository.CreateFarmAnimal(farmAnimal);
+        return farmAnimal;
     }
 
     public IEnumerable<Animal> GetAnimalsOfFarm(int farmId)
@@ -120,6 +132,17 @@ public class Manager : IManager
         ValidateEntity(harvestToCreate);
         _repository.CreateHarvest(harvestToCreate);
         return harvestToCreate;
+    }
+
+    public IEnumerable<Farm> GetFarmsOfAnimal(int animalId)
+    {
+        return _repository.ReadFarmsOfAnimal(animalId);
+        
+    }
+
+    public IEnumerable<Farm> GetAvailableFarmsOfAnimal(int animalId)
+    {
+        return _repository.ReadAvailableFarmsOfAnimal(animalId);
     }
 
     private void ValidateEntity(object entity)

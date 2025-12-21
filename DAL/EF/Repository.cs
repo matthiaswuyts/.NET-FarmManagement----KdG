@@ -126,4 +126,18 @@ public class Repository : IRepository
         _ctx.Harvests.Add(harvest);
         _ctx.SaveChanges();
     }
+
+    public IEnumerable<Farm> ReadFarmsOfAnimal(int animalId)
+    {
+        return _ctx.Farms
+            .Where(f => f.FarmAnimals.Any(fa => fa.Animal.Id == animalId))
+            .ToList();
+    }
+
+    public IEnumerable<Farm> ReadAvailableFarmsOfAnimal(int animalId)
+    {
+        return _ctx.Farms
+            .Where(f => !f.FarmAnimals.Any(fa => fa.Animal.Id == animalId))
+            .ToList();
+    }
 }

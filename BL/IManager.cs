@@ -18,7 +18,7 @@ public interface IManager
 
     public void RemoveFarmAnimal(int farmId, int animalId);
 
-    public void AddFarmAnimal(int farmId, int animalId, int count = 1);
+    public FarmAnimal AddFarmAnimal(int farmId, int animalId, int count = 1);
     
     public IEnumerable<Animal> GetAnimalsOfFarm(int farmId);
     
@@ -29,4 +29,8 @@ public interface IManager
     public IEnumerable<Harvest> GetAllHarvests();
     
     public Harvest AddHarvest(CropType cropType, DateOnly harvestDate, double quantity, Farm? farm);
+    
+    public IEnumerable<Farm> GetFarmsOfAnimal(int animalId);
+
+    public IEnumerable<Farm> GetAvailableFarmsOfAnimal(int animalId);
 }

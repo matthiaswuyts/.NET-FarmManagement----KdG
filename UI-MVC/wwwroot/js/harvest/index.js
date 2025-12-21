@@ -1,7 +1,5 @@
 ﻿function init() {
     getHarvests();
-
-   
     initRefresh();
 }
 
@@ -36,17 +34,15 @@ function getHarvests() {
         })
         .catch(err => {
             console.error(err);
-            alert('Er is iets misgelopen bij het ophalen van de harvests.');
+            alert("Er heeft zich een onverwachte fout voorgedaan.");
         });
 }
 
 function updateHarvestList(harvests) {
     const tbody = document.getElementById("harvestTableBody");
-
     
     tbody.innerHTML = '';
-
-   
+    
     for (const harvest of harvests) {
        
 
