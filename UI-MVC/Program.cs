@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<FarmManagementDbContext>(optionsBuilder =>
 {
-    optionsBuilder.UseSqlite(@"Data Source=..\..\..\..\FarmManagementDb.sqlite");
+    optionsBuilder.UseSqlite(@"Data Source=..\FarmManagementDb.sqlite");
 });
 
 builder.Services.AddScoped<IRepository, Repository>();
@@ -35,7 +35,7 @@ using (var scope = app.Services.CreateScope())
 {
     bool executeDropDatabase = true;
     FarmManagementDbContext farmManagementDbContext = scope.ServiceProvider.GetService<FarmManagementDbContext>();
-    bool  isDbCreated = farmManagementDbContext.CreateDatabase(executeDropDatabase);
+    bool isDbCreated = farmManagementDbContext.CreateDatabase(executeDropDatabase);
     if (isDbCreated)
     {
         DataSeeder.Seed(farmManagementDbContext);
