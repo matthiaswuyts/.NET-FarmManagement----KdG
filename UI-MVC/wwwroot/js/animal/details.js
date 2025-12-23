@@ -1,12 +1,12 @@
 ﻿loadContent();
 
-    
+
 const addForm = document.getElementById("btn-submit");
 addForm.addEventListener("click", addFarmToAnimal);
 
 function loadContent() {
     const animalId = document.getElementById("currentAnimalId").value;
-    
+
     getLinkedFarms(animalId);
     getAvailableFarms(animalId);
 }
@@ -35,7 +35,7 @@ function getLinkedFarms(animalId) {
 
 function updateLinkedFarmsTable(farms) {
     const tableBody = document.getElementById('farmsTableBody');
-    tableBody.innerHTML = ''; 
+    tableBody.innerHTML = '';
 
     if (farms.length === 0) {
         tableBody.innerHTML = '<tr><td colspan="5">Nog geen boerderijen gekoppeld.</td></tr>';
@@ -61,6 +61,9 @@ function getAvailableFarms(animalId) {
         headers: { 'Accept': 'application/json' }
     })
         .then(res => {
+            if (res.status === 204) {
+                return []; 
+            }
             if (res.ok) {
                 return res.json()
             } else {
@@ -68,7 +71,7 @@ function getAvailableFarms(animalId) {
             }
         })
         .then(data => {
-          
+
             updateAvailableFarmsDropdown(data);
         })
         .catch(error => {
@@ -79,9 +82,11 @@ function getAvailableFarms(animalId) {
 
 function updateAvailableFarmsDropdown(farmList) {
     const selectBox = document.getElementById("farmSelect");
-    
+
     selectBox.innerHTML = '<option value="" disabled selected> --- Select a farm --- </option>';
 
+ 
+    
     if (farmList.length === 0) {
         selectBox.insertAdjacentHTML('beforeend',
             '<option disabled>Geen boerderijen meer beschikbaar</option>');
@@ -93,41 +98,40 @@ function updateAvailableFarmsDropdown(farmList) {
     }
 }
 
-function addFarmToAnimal() {
-    
-    
+function addFarmToAnimal(event) {
+
+    event.preventDefault();
+
     const animalIdInput = document.getElementById("currentAnimalId");
     const farmSelect = document.getElementById("farmSelect");
     const countInput = document.getElementById("countInput");
-    
+
     if (!farmSelect.value) {
         alert("Selecteer eerst een boerderij!");
     }
     if (!countInput.value || parseInt(countInput.value) < 1) {
         alert("Het aantal moet minimaal 1 zijn!");
     }
-    
+
     const newFarmAnimal = {
         animalId: parseInt(animalIdInput.value),
         farmId: parseInt(farmSelect.value),
         count: parseInt(countInput.value)
     };
 
-   
+
     fetch('/api/FarmAnimals', {
         method: 'POST',
         body: JSON.stringify(newFarmAnimal),
         headers: {
-            'Content-Type': 'application/json', 
-            'Accept': 'application/json'
+            'Content-Type': 'application/json',
         }
-       
+
     })
         .then(res => {
             if (res.ok) {
-                farmSelect.value = ""; 
-                countInput.value = 1;  
-                
+                farmSelect.value = "";
+                countInput.value = 1;
                 loadContent();
             } else {
                 alert("Er is iets misgegaan bij het leggen van de relatie.");

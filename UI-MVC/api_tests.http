@@ -12,6 +12,7 @@ Content-Type: application/json
   "harvestDate": "2025-09-01"
 }
 
+
 ### ophalen van 1 harvest
 GET https://localhost:7214/api/Harvests/1
 Content-Type: application/json
@@ -32,6 +33,16 @@ Content-Type: application/json
 {
   "animalId": 13,
   "farmId": 1,
+  "count": 10
+}
+
+### legen van de relatie tussen farm en een animal
+POST https://localhost:7214/api/FarmAnimals
+Content-Type: application/json
+
+{
+  "animalId": 13,
+  "farmId": 2,
   "count": 10
 }
 
