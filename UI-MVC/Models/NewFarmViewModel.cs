@@ -10,12 +10,13 @@ public class NewFarmViewModel : IValidatableObject
     
     [Required]
     [StringLength(100)]
+    [RegularExpression(@"^[a-zA-Z\s\-]+$", ErrorMessage = "Location can only contain letters and spaces")]
     public string Location { get; set; }
     
-    [Range(0.1, double.MaxValue)]
+    [Range(0.01, 10000)]
     public double? SizeInHectares { get; set; }
     
-    [RegularExpression(@"^\d{4}$", ErrorMessage = "exactly 4 digits")]
+    [RegularExpression(@"^\d{4}$", ErrorMessage = "Established year must be exactly 4 digits")]
     public int EstablishedYear { get; set; }
     
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

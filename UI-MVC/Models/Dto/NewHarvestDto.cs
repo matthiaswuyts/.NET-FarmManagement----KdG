@@ -8,7 +8,7 @@ public class NewHarvestDto
     public CropType CropType { get; set; }
     [Required]
     public DateOnly HarvestDate { get; set; }
-    [Range(0.1, double.MaxValue)]
+    [Range(0.1, 1000000.0)]
 
     public double Quantity { get; set; }
     

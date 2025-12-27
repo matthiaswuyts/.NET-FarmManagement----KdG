@@ -60,7 +60,7 @@ public class ConsoleUi
                     RemoveAnimalFromFarm();
                     break;
                 default:
-                    Console.WriteLine("Please enter a number between 0 and 6.");
+                    Console.WriteLine("Please enter a number between 0 and 8.");
                     break;
             }
         }
@@ -215,7 +215,7 @@ public class ConsoleUi
 
     private void FilterFarms()
     {
-        Console.Write("Enter location: ");
+        Console.Write("Enter location (ex: Netherlands): ");
         string location = Console.ReadLine();
 
         if (int.TryParse(location, out int resAsNumber))
