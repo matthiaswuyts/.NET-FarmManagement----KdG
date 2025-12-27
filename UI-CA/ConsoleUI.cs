@@ -73,7 +73,7 @@ public class ConsoleUI
         Console.WriteLine("Which farm would you like to add an animal to?");
         foreach (Farm farm in allFarms)
         {
-            Console.WriteLine($"[{farm.Id}] {farm.Name}]");
+            Console.WriteLine($"[{farm.Id}] {farm.Name}");
         }
 
         Console.Write("Enter a farm ID: ");
@@ -161,7 +161,7 @@ public class ConsoleUI
         Console.WriteLine("Which farm would you like to remove an animal from?");
         foreach (Farm farm in allFarms)
         {
-            Console.WriteLine($"[{farm.Id}] {farm.Name}]");
+            Console.WriteLine($"[{farm.Id}] {farm.Name}");
         }
 
         Console.Write("Enter a farm ID: ");
