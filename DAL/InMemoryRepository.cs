@@ -40,7 +40,6 @@ public class InMemoryRepository : IRepository
 
     public void CreateFarm(Farm farm)
     {
-        //farm.Id = Farms.Count + 1;
         Farms.Add(farm);
        
     }
@@ -81,7 +80,6 @@ public class InMemoryRepository : IRepository
 
     public void CreateAnimal(Animal animal)
     {
-        //animal.Id = Animals.Count + 1;
         Animals.Add(animal);
     }
 

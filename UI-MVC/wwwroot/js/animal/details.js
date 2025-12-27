@@ -38,7 +38,7 @@ function updateLinkedFarmsTable(farms) {
     tableBody.innerHTML = '';
 
     if (farms.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="5">Nog geen boerderijen gekoppeld.</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="5">No farms connected.</td></tr>';
     }
 
     for (const farm of farms) {
@@ -88,7 +88,7 @@ function updateAvailableFarmsDropdown(farmList) {
  
     
     if (farmList.length === 0) {
-        selectBox.innerHTML = '<option value="" disabled selected>Geen boerderijen meer beschikbaar</option>'
+        selectBox.innerHTML = '<option value="" disabled selected>No more farms available</option>'
         const btn = document.getElementById("btn-submit")
         const countInput = document.getElementById("countInput");
         selectBox.disabled = true;
@@ -111,11 +111,11 @@ function addFarmToAnimal(event) {
     const countInput = document.getElementById("countInput");
 
     if (!farmSelect.value) {
-        alert("Selecteer eerst een boerderij!");
+        alert("Select a farm first!");
         return;
     }
     if (!countInput.value || parseInt(countInput.value) < 1) {
-        alert("Het aantal moet minimaal 1 zijn!");
+        alert("The count must be at least 1!");
         return;
     }
 
@@ -140,11 +140,11 @@ function addFarmToAnimal(event) {
                 countInput.value = 1;
                 loadContent();
             } else {
-                alert("Er is iets misgegaan bij het leggen van de relatie.");
+                alert("Something went wrong when trying to connect the farm and animal!");
             }
         })
         .catch(error => {
-            alert("Er heeft zich een onverwachte fout voorgedaan.");
+            alert("Unexpected error occurred.");
         });
 }
 

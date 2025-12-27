@@ -14,8 +14,8 @@ public static class DataSeeder
 
 
         // Adding to list
-        farmManagementDbContext.Farms.AddRange(new Farm[]
-            { sunnyMeadowFarm, greenValleyEstate, oldOakHomestead, riverbendFarmstead });
+        farmManagementDbContext.Farms.AddRange(
+            sunnyMeadowFarm, greenValleyEstate, oldOakHomestead, riverbendFarmstead );
         // Animals
         Animal holsteinCow = new Animal("Holstein", 10, 500, AnimalType.Cow);
         Animal jerseyCow = new Animal("Jersey", 12, 520, AnimalType.Cow);
@@ -40,12 +40,12 @@ public static class DataSeeder
         Animal thoroughbredHorse = new Animal("Thoroughbred", 14, 420, AnimalType.Horse);
 
 
-        farmManagementDbContext.Animals.AddRange(new Animal[]
-        {
+        farmManagementDbContext.Animals.AddRange(
+        
             holsteinCow, jerseyCow, angusCow, berkshirePig, largeWhitePig, durocPig, silkieChicken, leghornChicken,
             rhodeIslandChicken, merinoSheep, suffolkSheep, alpineGoat, boerGoat, friesianHorse, arabianHorse,
             thoroughbredHorse
-        });
+        );
 
 
         var farmAnimals = new List<FarmAnimal>
