@@ -3,16 +3,19 @@ using AspNetCoreLiveMonitoring.Extensions;
 using FarmManagement.BL;
 using FarmManagement.DAL;
 using FarmManagement.DAL.EF;
+using FarmManagement.UI.Web;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("FarmManagementDbContextConnection") ?? throw new InvalidOperationException("Connection string 'FarmManagementDbContextConnection' not found.");;
 
 // Add services to the container.
 
 
 builder.Services.AddDbContext<FarmManagementDbContext>(optionsBuilder =>
 {
-    optionsBuilder.UseSqlite(@"Data Source=..\FarmManagementDb.sqlite");
+    optionsBuilder.UseSqlite(connectionString);
 });
 
 builder.Services.AddScoped<IRepository, Repository>();
@@ -25,9 +28,40 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation()
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+    {
+        
+    })
+    .AddEntityFrameworkStores<FarmManagementDbContext>();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+});
+
+// Fix api: authorization status codes
+builder.Services.ConfigureApplicationCookie (cfg =>
+{
+    cfg.Events.OnRedirectToLogin += ctx =>
+    {
+        if (ctx.Request.Path.StartsWithSegments ("/api"))
+        {
+            ctx.Response.StatusCode = 401;
+        }
+        return Task.CompletedTask;
+    };
+    cfg.Events.OnRedirectToAccessDenied += ctx =>
+    {
+        if (ctx.Request.Path.StartsWithSegments ("/api"))
+        {
+            ctx.Response.StatusCode = 403;
+        }
+        return Task.CompletedTask;
+    };
+});
+
+
 builder.Services.AddLiveMonitoring();
 
-builder.Services.AddAuthentication().AddCookie();
 
 var app = builder.Build();
 
@@ -40,6 +74,11 @@ using (var scope = app.Services.CreateScope())
     bool isDbCreated = farmManagementDbContext.CreateDatabase(executeDropDatabase);
     if (isDbCreated)
     {
+        var userManager = scope.ServiceProvider.GetService<UserManager<IdentityUser>>();
+        IdentitySeeder identitySeeder = new IdentitySeeder(userManager);
+        identitySeeder.Seed();
+        
+        
         DataSeeder.Seed(farmManagementDbContext);
     }
 }
@@ -68,3 +107,4 @@ app.MapControllerRoute(
 
 
 app.Run();
+

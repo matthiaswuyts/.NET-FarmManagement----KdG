@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FarmManagement.BL.Domain;
 using FarmManagement.DAL;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace FarmManagement.BL;
@@ -29,9 +30,10 @@ public class Manager : IManager
         return _repository.ReadFarmsByLocation(location);
     }
 
-    public Farm AddFarm(string name, string location, int establishedYear, double? sizeInHectares)
+    public Farm AddFarm(string name, string location, int establishedYear, double? sizeInHectares, string maintainer)
     {
-        Farm farmToCreate = new Farm(name, location, establishedYear, sizeInHectares);
+        var maint = _repository.ReadUser(maintainer);
+        Farm farmToCreate = new Farm(name, location, establishedYear, maint ,sizeInHectares);
         ValidateEntity(farmToCreate);
         _repository.CreateFarm(farmToCreate);
         return farmToCreate;
@@ -138,6 +140,22 @@ public class Manager : IManager
     public Harvest GetHarvest(int id)
     {
         return _repository.ReadHarvest(id);
+    }
+
+    public Farm GetFarmWithAnimalsAndMaintainer(int farmId)
+    {
+        return _repository.ReadFarmWithAnimalsAndMaintainer(farmId);
+    }
+
+    public Farm GetFarmWithMaintainer(int farmId)
+    {
+        return _repository.ReadFarmWithMaintainer(farmId);
+    }
+
+    public void ChangeFarm(Farm farm)
+    {
+       ValidateEntity(farm);
+        _repository.UpdateFarm(farm);
     }
 
     private void ValidateEntity(object entity)

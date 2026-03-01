@@ -4,6 +4,7 @@ using FarmManagement.UI.Web.Models;
 
 namespace FarmManagement.UI.Web.Controllers;
 
+[AutoValidateAntiforgeryToken]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;

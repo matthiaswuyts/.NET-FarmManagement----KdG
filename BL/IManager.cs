@@ -1,4 +1,6 @@
 ﻿using FarmManagement.BL.Domain;
+using Microsoft.AspNetCore.Identity;
+
 namespace FarmManagement.BL;
 
 public interface IManager
@@ -6,7 +8,7 @@ public interface IManager
     public Farm GetFarm(int id);
     public IEnumerable<Farm> GetAllFarms();
     public IEnumerable<Farm> GetFarmsByLocation(string location);
-    public Farm AddFarm(string name, string location, int establishedYear, double? sizeInHectares);
+    public Farm AddFarm(string name, string location, int establishedYear, double? sizeInHectares, string maintainer);
     
     public Animal GetAnimal(int id);
     public IEnumerable<Animal> GetAllAnimals();
@@ -35,4 +37,9 @@ public interface IManager
     public IEnumerable<Farm> GetAvailableFarmsOfAnimal(int animalId);
 
     public Harvest GetHarvest(int id);
+
+    public Farm GetFarmWithAnimalsAndMaintainer(int farmId);
+    
+    public Farm GetFarmWithMaintainer(int farmId);
+    public void ChangeFarm(Farm farm);
 }

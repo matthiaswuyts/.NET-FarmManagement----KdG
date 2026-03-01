@@ -1,12 +1,14 @@
 ﻿using FarmManagement.BL;
 using FarmManagement.BL.Domain;
 using FarmManagement.UI.Web.Models.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FarmManagement.UI.Web.Controllers.Api;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class HarvestsController : ControllerBase
 {
     private readonly IManager _manager;
@@ -18,7 +20,7 @@ public class HarvestsController : ControllerBase
 
     [Route("{id}")]
     [HttpGet]
-
+    [AllowAnonymous]
     public IActionResult GetHarvest(int id)
     {
         var harvest = _manager.GetHarvest(id);
@@ -30,6 +32,7 @@ public class HarvestsController : ControllerBase
     
 
     [HttpGet]
+    [AllowAnonymous]
     public IActionResult GetAllHarvests()
     {
         var harvests = _manager.GetAllHarvests();
@@ -40,7 +43,7 @@ public class HarvestsController : ControllerBase
     }
 
     [HttpPost]
-
+    // wordt all geauthorized op class niveau
     public IActionResult Post(NewHarvestDto newHarvest)
     {
         

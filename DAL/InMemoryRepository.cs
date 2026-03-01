@@ -1,8 +1,11 @@
 ﻿using FarmManagement.BL.Domain;
+using Microsoft.AspNetCore.Identity;
+
 namespace FarmManagement.DAL;
 
 public class InMemoryRepository : IRepository
 {
+    private IRepository _repositoryImplementation;
     internal static List<Farm> Farms { get; }= new();
     internal static List<Animal> Animals { get; } = new();
 
@@ -139,6 +142,26 @@ public class InMemoryRepository : IRepository
     }
 
     public Harvest ReadHarvest(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IdentityUser ReadUser(string dataOwner)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Farm ReadFarmWithAnimalsAndMaintainer(int farmId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Farm ReadFarmWithMaintainer(int farmId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void UpdateFarm(Farm updatedFarm)
     {
         throw new NotImplementedException();
     }

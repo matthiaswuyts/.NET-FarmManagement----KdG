@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace FarmManagement.BL.Domain;
 public class Farm : IValidatableObject
@@ -24,18 +25,22 @@ public class Farm : IValidatableObject
     public ICollection<Harvest> Harvests { get; set; } = [];
 
     public ICollection<FarmAnimal> FarmAnimals { get; set; } = [];
+    
+    [Required]
+    public IdentityUser Maintainer { get; set; }
 
     public Farm()
     {
         
     }
 
-    public Farm(string name, string location, int establishedYear,double? sizeInHectares = null)
+    public Farm(string name, string location, int establishedYear, IdentityUser maintainer ,double? sizeInHectares = null)
     {
         Name = name;
         Location = location;
         SizeInHectares = sizeInHectares;
         EstablishedYear = establishedYear;
+        Maintainer = maintainer;
     }
     
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

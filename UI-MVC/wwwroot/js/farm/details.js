@@ -1,0 +1,20 @@
+const saveButton = document.getElementById("buttonSave");
+saveButton.addEventListener('click', updateSize)
+function updateSize() {
+    const newSize = document.getElementById("inputSize").value;
+    const farmId = document.getElementById("farmId").value;
+    fetch(`/api/Farm/${farmId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({sizeInHectares: parseFloat(newSize)})
+    })
+        .then(res => {
+           if(res.ok) {
+               alert("Successfully updated size");
+           }
+           
+        })
+        .catch(error => {
+            alert("Unexpected error occurred.");
+        });
+}

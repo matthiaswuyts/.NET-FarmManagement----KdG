@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Details Farm";
 }
-
+<input type="hidden" id="farmId" value="@Model.Id" />
 <h2 class="mb-3">Farm Details</h2>
 <div>
     <table>
@@ -18,17 +18,35 @@
             <td>&nbsp;</td>
             <td>@Model.Location</td>
         </tr>
-        <tr>
-            <th>Size in Hectares</th>
-            <td>&nbsp;</td>
-            <td>@(Model.SizeInHectares.HasValue ? $"{Model.SizeInHectares}" : "Unknown")</td>
-        </tr>
+        @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.Maintainer.UserName)
+        {
+            <tr>
+                <th>Size in Hectares</th>
+                <td>&nbsp;</td>
+                <td>
+                    <span class="ms-3">
+                        <input type="number" id="inputSize" value="@Model.SizeInHectares" 
+                               step="0.01" style="width: 80px;" class="form-control-sm d-inline" />
+                        <button class="btn btn-sm btn-outline-primary" id="buttonSave" >Save</button>
+                    </span>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <th>Size in Hectares</th>
+                <td>&nbsp;</td>
+                <td>@(Model.SizeInHectares.HasValue ? $"{Model.SizeInHectares}" : "Unknown")</td>
+            </tr>
+        }
         <tr>
             <th>Established Year</th>
             <td>&nbsp;</td>
             <td>@Model.EstablishedYear</td>
         </tr>
     </table>
+    <p class="">Maintained by @Model.Maintainer.UserName</p>
 </div>
 
 <h2 class="mt-3">Animals</h2>
@@ -66,3 +84,8 @@
     }
 </div>
 
+
+@section Scripts
+{
+    <script defer src="/js/farm/details.js"></script>
+}

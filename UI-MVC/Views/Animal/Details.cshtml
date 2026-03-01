@@ -42,7 +42,6 @@
                 <th>Location</th>
                 <th>Size In Hectares</th>
                 <th>Established Year</th>
-                
             </tr>
         </thead>
         <tbody id="farmsTableBody" class="table-group-divider">
@@ -50,22 +49,24 @@
     </table>
 </div>
 
-<div class="mt-4">
-    <h3>Add Farm</h3>
-    <form id="addFarmForm">
-        <div class="mb-3">
-            <label for="farmSelect" class="form-label">Farm</label>
-            <select id="farmSelect" class="form-select" required>
-                <option value="" disabled selected> --- Select a farm --- </option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="countInput" class="form-label">Count</label>
-            <input type="number" id="countInput" class="form-control" min="1" value="1" required />
-        </div>
-        <button id="btn-submit" type="submit" class="btn btn-primary">Add</button>
-    </form>
-</div>
+@if (User.Identity?.IsAuthenticated ?? false) {
+    <div class="mt-4">
+        <h3>Add Farm</h3>
+        <form id="addFarmForm">
+            <div class="mb-3">
+                <label for="farmSelect" class="form-label">Farm</label>
+                <select id="farmSelect" class="form-select" required>
+                    <option value="" disabled selected> --- Select a farm --- </option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="countInput" class="form-label">Count</label>
+                <input type="number" id="countInput" class="form-control" min="1" value="1" required />
+            </div>
+            <button id="btn-submit" type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+}
 
 @section Scripts {
 <script defer src="/js/animal/details.js"></script>

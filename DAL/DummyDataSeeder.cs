@@ -6,10 +6,10 @@ public class DummyDataSeeder
     public void Seed()
     {
         // Farms
-        Farm sunnyMeadowFarm = new Farm("Sunny Meadow Farm", "Netherlands", 1995, 50);
-        Farm greenValleyEstate = new Farm("Green Valley Estate", "Belgium", 2000, 74.2);
-        Farm oldOakHomestead = new Farm("Old Oak Homestead", "Germany", 1980);
-        Farm riverbendFarmstead = new Farm("Riverbend Farmstead", "Netherlands", 2010, 60);
+        Farm sunnyMeadowFarm = new Farm("Sunny Meadow Farm", "Netherlands", 1995,null, 50);
+        Farm greenValleyEstate = new Farm("Green Valley Estate", "Belgium", 2000, null,74.2);
+        Farm oldOakHomestead = new Farm("Old Oak Homestead", "Germany", 1980,null);
+        Farm riverbendFarmstead = new Farm("Riverbend Farmstead", "Netherlands", 2010, null, 60);
         
 
         // Adding to list

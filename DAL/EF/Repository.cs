@@ -1,4 +1,5 @@
 ﻿using FarmManagement.BL.Domain;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace FarmManagement.DAL.EF;
@@ -144,5 +145,32 @@ public class Repository : IRepository
     public Harvest ReadHarvest(int id)
     {
         return _ctx.Harvests.Find(id);
+    }
+    
+    public IdentityUser ReadUser(string maintainer)
+    {
+        return _ctx.Users.SingleOrDefault(u => u.UserName == maintainer);
+    }
+    
+    public Farm ReadFarmWithAnimalsAndMaintainer(int farmId)
+    {
+        return _ctx.Farms
+            .Include(f => f.FarmAnimals)
+            .ThenInclude(fa => fa.Animal)
+            .Include(f => f.Maintainer)
+            .SingleOrDefault(f => f.Id == farmId);
+    }
+
+    public Farm ReadFarmWithMaintainer(int farmId)
+    {
+        return _ctx.Farms
+            .Include(f => f.Maintainer) 
+            .SingleOrDefault(f => f.Id == farmId);
+    }
+
+    public void UpdateFarm(Farm updatedFarm)
+    {
+        _ctx.Farms.Update(updatedFarm);
+        _ctx.SaveChanges();
     }
 }

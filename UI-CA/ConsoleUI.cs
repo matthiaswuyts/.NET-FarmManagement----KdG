@@ -354,7 +354,7 @@ public class ConsoleUi
 
             try
             {
-                Farm newFarm = _mgr.AddFarm(name, location,year,sizeResult);
+                Farm newFarm = _mgr.AddFarm(name, location,year,sizeResult,null);
                 Console.WriteLine("Farm added successfully.");
                 break;
             }

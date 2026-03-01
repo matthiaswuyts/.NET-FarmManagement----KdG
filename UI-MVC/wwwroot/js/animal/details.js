@@ -2,13 +2,17 @@
 
 
 const addForm = document.getElementById("btn-submit");
-addForm.addEventListener("click", addFarmToAnimal);
+if (addForm) {
+    addForm.addEventListener("click", addFarmToAnimal);
+}
 
 function loadContent() {
     const animalId = document.getElementById("currentAnimalId").value;
 
     getLinkedFarms(animalId);
-    getAvailableFarms(animalId);
+    if(document.getElementById("farmSelect")) {
+        getAvailableFarms(animalId);
+    }
 }
 
 
@@ -42,6 +46,7 @@ function updateLinkedFarmsTable(farms) {
     }
 
     for (const farm of farms) {
+        console.log(farm);
         const rowHtml = `
             <tr>
                 <td>${farm.name}</td>

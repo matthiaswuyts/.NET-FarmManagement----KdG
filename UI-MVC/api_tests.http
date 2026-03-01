@@ -63,3 +63,13 @@ Content-Type: application/json
   "farmId": 1,
   "count": "FoutieveTekst"
 }
+
+
+### Unauthorized PUT test
+
+PUT https://localhost:7214/api/Farm/1
+Content-Type: application/json
+
+{
+  "sizeInHectares": 250.75
+}

@@ -1,11 +1,12 @@
 ﻿using System.Diagnostics;
 using FarmManagement.BL.Domain;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace FarmManagement.DAL.EF;
 
-public class FarmManagementDbContext : DbContext
+public class FarmManagementDbContext : IdentityDbContext
 {
     
     public DbSet<Farm> Farms { get; set; }
@@ -66,6 +67,12 @@ public class FarmManagementDbContext : DbContext
             .HasOne(f => f.Farm)
             .WithMany(h => h.Harvests)
             .HasForeignKey("FkFarmId");
+
+
+        modelBuilder.Entity<Farm>()
+            .HasOne(f => f.Maintainer)
+            .WithMany()
+            .IsRequired();
         
         modelBuilder.Entity<FarmAnimal>().HasKey("FkFarmId","FkAnimalId");
 

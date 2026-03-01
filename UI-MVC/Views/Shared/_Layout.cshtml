@@ -23,9 +23,11 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Farm" asp-action="Index">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Farm" asp-action="Add">Add Farm</a>
-                    </li>
+                    @if (User.Identity?.IsAuthenticated ?? false) {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Farm" asp-action="Add">Add Farm</a>
+                        </li>
+                    }
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Harvest" asp-action="Index">Harvests</a>
                     </li>
@@ -36,6 +38,7 @@
                         <partial name="_LiveMonitoringLinkPartial"></partial>
                     </li>
                 </ul>
+                <partial name="_LoginPartial"/>
             </div>
         </div>
     </nav>

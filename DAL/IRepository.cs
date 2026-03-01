@@ -1,4 +1,6 @@
 ﻿using FarmManagement.BL.Domain;
+using Microsoft.AspNetCore.Identity;
+
 namespace FarmManagement.DAL;
 
 public interface IRepository
@@ -35,4 +37,10 @@ public interface IRepository
     public IEnumerable<Farm> ReadAvailableFarmsOfAnimal(int animalId);
     
     public Harvest ReadHarvest(int id);
+    public IdentityUser ReadUser(string maintainer);
+
+    public Farm ReadFarmWithAnimalsAndMaintainer(int farmId);
+
+    public Farm ReadFarmWithMaintainer(int farmId);
+    public void UpdateFarm(Farm updatedFarm);
 }
