@@ -1,5 +1,7 @@
 const saveButton = document.getElementById("buttonSave");
-saveButton.addEventListener('click', updateSize)
+if (saveButton) {
+    saveButton.addEventListener('click', updateSize);
+}
 function updateSize() {
     const newSize = document.getElementById("inputSize").value;
     const farmId = document.getElementById("farmId").value;
