@@ -117,7 +117,8 @@ tests:
     when: always
     reports:
       junit: Tests/TestResults/TestResults.xml
-      coverage_report: cobertura
+      coverage_report: 
+        coverage_format: cobertura
       path: Tests/TestResults/*/coverage.cobertura.xml
     paths:
       - Tests/TestResults/CoverageReport
